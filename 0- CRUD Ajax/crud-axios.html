@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>CRUD API REST Ajax</title>
+</head>
+<body>
+    <h1>CRUD API REST AJAX:ASYNC Axios</h1>
+    <hr>
+        <section id="crud">
+            <article class="add-user">
+                <h2 class="crud-title">Agregar Usuario</h2>
+                <form class="crud-form">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" for="name" id="nombre" placeholder="Nombre" required>
+
+                    <label for="usuario">Usuario</label>
+                    <input type="text" for="username" id="usuario" placeholder="Nombre de usuario" required>
+
+                    <label for="correo">Correo</label>
+                    <input type="email" for="email" id="correo" placeholder="Correo electronico" required>
+
+                    <input type="submit" value="Enviar">
+
+                    <!-- Input para indicar que accion se va a realizar -->
+                    <input type="hidden" name="id">
+                </form>
+            </article>
+            <article class="show-users">
+                <h2>Ver usuarios</h2>
+                <table class="crud-table show">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <td>Angel</td>
+                            <td>angelthz</td>
+                            <td>angeltorreshernan@gmail.com</td>
+                            <td>
+                                <button>Editar</button>
+                                <button>Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Angel</td>
+                            <td>angelthz</td>
+                            <td>angeltorreshernan@gmail.com</td>
+                            <td>
+                                <button>Editar</button>
+                                <button>Eliminar</button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+                <img src="assets/tail-spin.svg" alt="loader" class="loader">
+            </article>
+        </section>
+    <template id="crud-template">
+        <tr>
+            <td class="id"></td>
+            <td class="name"></td>
+            <td class="username"></td>
+            <td class="email"></td>
+            <td>
+                <button class="edit">Editar</button>
+                <button class="delete">Eliminar</button>
+            </td>
+        </tr>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+        //VARIABLES DEL DOM
+        const tabla = document.querySelector(".crud-table");
+        const formulario = document.querySelector(".crud-form");
+        const title = document.querySelector(".crud-title");
+        const template = document.getElementById("crud-template").content;
+        const fragmento = document.createDocumentFragment();
+        const loader = document.querySelector(".loader");
+
+        //instancia de axios
+        const myAxios = axios.create({
+            baseURL: "http://localhost:5000/usuarios",
+            timeout: 3000
+            // headers: {
+            //     "Content-type" : "application/json; charset=utf-8"
+            // }
+        });
+
+
+        //cargando la tabla con los registros
+        document.addEventListener("DOMContentLoaded", async (e) => {
+            try{
+                let res = await myAxios.get();
+                res.data.forEach(user => {
+                        template.querySelector(".id").textContent = user.id;
+                        template.querySelector(".name").textContent = user.name;
+                        template.querySelector(".username").textContent = user.username;
+                        template.querySelector(".email").textContent = user.email;
+
+                        template.querySelector(".edit").dataset.id = user.id;
+                        template.querySelector(".edit").dataset.name = user.name;
+                        template.querySelector(".edit").dataset.username = user.username;
+                        template.querySelector(".edit").dataset.email = user.email;
+                        
+                        template.querySelector(".delete").dataset.id = user.id;
+
+                        let row = document.importNode(template, true);
+                        fragmento.appendChild(row);
+                    });
+                    tabla.appendChild(fragmento);
+                    tabla.classList.remove("show");
+                    loader.classList.add("show");
+                //console.log(res);
+            }
+            catch(err){
+                console.warn(err.response.status, err.response.statusText);
+                tabla.classList.remove("show");
+                loader.classList.add("show");
+                tabla.insertAdjacentHTML("afterend",`<p>Error: <b>${err.response.status}</b> ${err.response.statusText}</p>`)
+            }
+        });
+
+        //agregar un nuevo usuario
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            //agregar usuario
+            if(e.target.id.hasAttribute("value")){
+                try{
+                   let res = await myAxios.put(`/${e.target.id.getAttribute("value")}`, {
+                        name: e.target.nombre.value,
+                        username: e.target.usuario.value,
+                        email: e.target.correo.value
+                   });
+                   location.reload();
+                }
+                catch(err){
+                    console.warn(err.response.status, err.response.statusText);
+                }
+            }
+            else{
+                try{
+                    let res = await myAxios.post("/",{
+                        name: e.target.nombre.value,
+                        username: e.target.usuario.value,
+                        email: e.target.correo.value
+                    });
+                    location.reload();
+                }catch(err){
+                    console.warn(err.response.status, err.response.statusText);
+                }
+            }
+        });
+
+
+        //botones de eliminar y editar
+        document.addEventListener("click", async (e) => {
+            //borrar
+            if(e.target.matches(".delete")){
+                try{
+                    let conf = confirm(`Esta seguro de eliminar el registro: ${e.target.dataset.id}`);
+                    if(conf){
+                        let res = await myAxios.delete(`/${e.target.dataset.id}`);
+                        location.reload();
+                    }
+                }
+                catch(err){
+                    console.warn(err.response.status, err.response.statusText);
+                }
+            }
+            //editar
+            if(e.target.matches(".edit")){
+                try{
+                    formulario.nombre.value = e.target.dataset.name;
+                    formulario.usuario.value = e.target.dataset.username;
+                    formulario.correo.value = e.target.dataset.email;
+                    formulario.id.setAttribute("value", e.target.dataset.id);
+                }
+                catch(err){
+
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

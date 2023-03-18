@@ -1,0 +1,112 @@
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-64 { font-size: 64px; }
+.material-icons.md-128 { font-size: 128px; }
+.material-icons.md-res { font-size: 10vh; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+.material-icons.height-800 {font-weight: bold;} 
+
+html{
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+}
+
+body{
+    background-color: #dde8fa;
+    margin: 0;
+}
+
+header{
+    /* background-color: white; */
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header h1{
+    margin: 0;
+    text-align: center;
+}
+
+.uploader-container{
+    margin:  2% auto;
+    padding: 2%;
+    width: 55%;
+    height: 80vh;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0px 7px 8px 2px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.uploader-container h2{
+    margin: 0;
+    width: 100%;
+    height: 10%;
+}
+
+.uploader-form{
+    width: 100%;
+    height: 100%;
+    border: 3px dashed lightslategray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.uploader-form label{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+.uploader-form label:hover{
+    cursor: pointer;
+}
+.uploader-form span:first-child{
+    color: #1089f6;
+    transition: all .3s ease;
+}
+.uploader-form span:first-child:hover{
+    color: #0a65b5;
+}
+
+.uploader-container input{
+    display: none;
+}
+
+.uploader-list{
+    width: 80%;
+    max-height: 30%;
+    overflow-y: scroll;
+}
+
+/* .uploader-list{
+    width: 100%;
+    height: 30%;
+    background-color: lightblue;
+} */

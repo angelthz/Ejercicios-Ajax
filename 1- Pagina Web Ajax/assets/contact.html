@@ -1,0 +1,79 @@
+<section class="contact-form">
+
+    <form>
+        <label for="nombreyapellido">Nombre y apellido</label>
+        <input type="text" id="nombreyapellido" class="padron" placeholder="Nombre y apellido" required>
+
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" class="padron" placeholder="email@dominio.com" required>
+
+        <label for="telefono">Telefono:</label>
+        <input type="tel" id="telefono" class="padron" placeholder="(XX) XXXX XXXX" required>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" placeholder="Ingrese sus comentarios" class="padron"></textarea>
+
+        <fieldset>
+            <legend>¿Como le gustaria que lo contactemos?</legend>
+            <label for="radio-email">
+                <input type="radio" name="contacto" value="email" id="radio-email">
+                Email
+            </label>
+
+
+            <label for="radio-tel">
+                <input type="radio" name="contacto" value="telefono" id="radio-tel">
+                Telefono
+            </label>
+
+
+            <label for="radio-whats">
+                <input type="radio" name="contacto" value="whatsapp" id="radio-whats" checked>
+                Whatsapp
+            </label>
+        </fieldset>
+
+        </div>
+
+        <fieldset>
+            <legend>¿En que horario prefiere ser atendido?</legend>
+            <select>
+                <option>Mañana</option>
+                <option>Tarde</option>
+                <option>Noche</option>
+            </select>
+        </fieldset>
+
+        <label class="checkbox">
+            <input type="checkbox" checked>
+            ¿Le gustaria recibir novedades de la Barberia Alura?
+        </label>
+
+
+
+        <input type="submit" value="Enviar formulario" class="enviar">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Dia</th>
+                <th>Horario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Lunes</td>
+                <td>08 - 20h</td>
+            </tr>
+            <tr>
+                <td>Miercoles</td>
+                <td>08 - 20h</td>
+            </tr>
+            <tr>
+                <td>Viernes</td>
+                <td>08 - 20h</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

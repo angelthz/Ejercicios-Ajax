@@ -1,0 +1,168 @@
+html{
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+#crud{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+
+}
+
+.add-user{
+    width: 30%;
+    height: 100%;
+    /* border: 1px solid black; */
+}
+.show-users{
+    width: 70%;
+    height: 100%;
+    /* border: 1px solid magenta; */
+}
+
+.show-users p{
+    font-size: 2rem;
+    text-align: center;
+}
+
+form{
+    /* width: 40%; */
+    height: auto;
+    margin: 0 auto;
+    padding: 1%;
+    border-radius: .6rem;
+}
+
+form label{
+    display: block;
+    margin: 0 0 .4rem 0;
+    font-size: 1.1rem;
+}
+
+form input{
+    display: block;
+    width: 100%;
+    height: 2.5rem;
+    margin: 0 0 1.5rem 0;
+    outline: none;
+    border: 3px solid #ccc;
+    transition: border .3s ease;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border-radius: .4rem;
+}
+
+form input:focus{
+    border: 3px solid lightskyblue;
+}
+
+form input:not([type="submit"]):valid{
+    border: 3px solid lightgreen;
+}
+
+form input[type="submit"]{
+    width: 50%;
+    margin: 0 auto;
+    /* border-radius: .4rem; */
+}
+form input[type="submit"]:hover{
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    /* min-width: 400px; */
+    width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: scroll;
+}
+
+thead tr {
+    background-color: lightseagreen;
+    color: #ffffff;
+    text-align: left;
+    height: 3.5rem;
+}
+
+th,
+td {
+    padding: 12px 15px;
+}
+
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+    height: 3.5rem;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid lightseagreen;
+}
+
+tr td:last-child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+tr td>button{
+
+    width: 45%;
+    height: 2rem;
+    outline: none;
+    border: none;
+    border-radius: .2rem;
+}
+
+tr td>button:nth-child(odd){
+    background-color: lightskyblue;
+}
+tr td>button:nth-child(odd):hover{
+    background-color: rgb(114, 174, 211);
+}
+
+tr td>button:nth-child(even){
+    background-color: lightcoral;
+}
+tr td>button:nth-child(even):hover{
+    background-color: rgb(208, 111, 111);
+}
+
+tr td>button:hover{
+    cursor: pointer;
+}
+
+
+.loader{
+    display: block;
+    margin: auto;
+    width: 10%;
+    height: 80%;
+    /* background-color: magenta; */
+}
+
+.show{
+    display: none;
+}
+
+

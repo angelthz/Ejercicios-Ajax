@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Subir archivos al servidor</title>
+</head>
+
+<body>
+    <header>
+        <h1>Subir archivos al servidor con AJAX</h1>
+    </header>
+    <main class="uploader-container">
+        <h2 class="title">Sube tus archivos</h2>
+        <div class="uploader-form">
+            <label for="input-files">
+                <span class="material-icons md-128">cloud_upload</span>
+                <span>Haz clic para seleccionar tus archivos</span>
+                <input type="file" name="files" id="input-files" multiple>
+            </label>
+            <div class="uploader-list"></div>
+        </div>
+        
+    </main>
+    <footer>
+
+    </footer>
+    <script src="main.js"></script>
+</body>
+
+</html>

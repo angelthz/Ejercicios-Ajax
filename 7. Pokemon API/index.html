@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Pokemon</title>
+</head>
+<body>
+    <header class="header">
+        <h1>Pokemon</h1>
+    </header>
+    <nav class="links">
+        <!-- <button class="hide prev dark-icon material-icons md-36" data-url>
+            arrow_back
+        </button>
+        <button class="next dark-icon material-icons md-36 hide" data-url>
+            arrow_forward
+        </button> -->
+    </nav>
+    <img src="assets/tail-spin.svg" alt="loader" class="loader">
+    <main class="poke-grid">
+        <template class="card-template">
+            <figure>
+                <div class="img-container"><img class="img"></div>
+                <span class="id"></span>
+                <figcaption class="name"></figcaption>
+            </figure>
+        </template>        
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>

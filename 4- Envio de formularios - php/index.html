@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Envio de formulario</title>
+</head>
+<body>
+    <section class="section">
+        <h1>Envio de formularios con Fetch/PHP</h1>
+        <hr>
+        <form class="contact-form">
+            <!-- <fieldset> -->
+            <legend>Contacto</legend>
+
+            <label for="name">Nombre</label>
+            <input type="text" name="nombre" id="name" placeholder="Ingresa tu nombre" title="Nombre solo acepta letras y espacios en blanco" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
+
+            <label for="email">Correo</label>
+            <input type="email" name="correo" id="email" placeholder="correo@dominio.com" title="Email solo acepta un formato valido de correo" pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>
+            
+            <label for="subject">Asunto</label>
+            <input type="text" name="asunto" id="subject" placeholder="Asunto" title="El asunto es requerido" required>
+
+            <label for="comments">Comentarios</label>
+            <textarea name="comentarios" id="comments" placeholder="Escribe tus comentarios" data-pattern="^.{1,255}$" title="Tu comentario no debe superar los 255 caracteres." required></textarea>
+            <div class="send">
+                <input type="submit" value="Enviar">
+                <input type="reset">
+            </div>
+
+            <p class="contact-form-response ">
+                <!-- <p>Los datos han sido enviados</p> -->
+            </p>
+            <div class="loader none">
+                <img src="tail-spin.svg" alt="loader">
+            </div>
+        </form>
+        
+    </section>
+    <script src="main.js"></script>
+</body>
+</html>

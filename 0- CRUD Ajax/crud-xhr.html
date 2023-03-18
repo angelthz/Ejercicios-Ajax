@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>CRUD API REST Ajax</title>
+</head>
+<body>
+    <h1>CRUD API REST AJAX: XHR</h1>
+    <hr>
+        <section id="crud">
+            <article class="add-user">
+                <h2 class="crud-title">Agregar Usuario</h2>
+                <form class="crud-form">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" for="name" id="nombre" placeholder="Nombre" required>
+
+                    <label for="usuario">Usuario</label>
+                    <input type="text" for="username" id="usuario" placeholder="Nombre de usuario" required>
+
+                    <label for="correo">Correo</label>
+                    <input type="email" for="email" id="correo" placeholder="Correo electronico" required>
+
+                    <input type="submit" value="Enviar">
+
+                    <!-- Input para indicar que accion se va a realizar -->
+                    <input type="hidden" name="id">
+                </form>
+            </article>
+            <article class="show-users">
+                <h2>Ver usuarios</h2>
+                <table class="crud-table show">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <td>Angel</td>
+                            <td>angelthz</td>
+                            <td>angeltorreshernan@gmail.com</td>
+                            <td>
+                                <button>Editar</button>
+                                <button>Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Angel</td>
+                            <td>angelthz</td>
+                            <td>angeltorreshernan@gmail.com</td>
+                            <td>
+                                <button>Editar</button>
+                                <button>Eliminar</button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+                <img src="assets/tail-spin.svg" alt="loader" class="loader">
+            </article>
+        </section>
+    <template id="crud-template">
+        <tr>
+            <td class="id"></td>
+            <td class="name"></td>
+            <td class="username"></td>
+            <td class="email"></td>
+            <td>
+                <button class="edit">Editar</button>
+                <button class="delete">Eliminar</button>
+            </td>
+        </tr>
+    </template>
+    <script>
+        //VARIABLES DEL DOM
+        const tabla = document.querySelector(".crud-table");
+        const formulario = document.querySelector(".crud-form");
+        const title = document.querySelector(".crud-title");
+        const template = document.getElementById("crud-template").content;
+        const fragmento = document.createDocumentFragment();
+        const loader = document.querySelector(".loader");
+        // console.log(template);
+        /*
+        * options: un objeto con los sig atributos
+        * String url: la url a la cual se hace la peticion-required
+        * String method: el metodo por el cual se hace la peticion (POST, GET, PUT, DELETE)-required
+        * function succes: una funcion para manejar el resultado required
+        * function error: una funcion para manejar el error-required
+        * object data: un objeto con el contenido a añadir-optional o null
+        */
+        const xhrAjax = (options)=>{
+            //con destructuracion
+            let {url, method, succes, error, data} = options;
+
+            //objeto XHR
+            const xhr = new XMLHttpRequest();
+
+            //listener para el evento readystatechange
+            xhr.addEventListener("readystatechange", e => {
+                if(xhr.readyState !== 4) return;
+                if(xhr.status >= 200 && xhr.status<300){
+                    
+                    let res = JSON.parse(xhr.responseText);
+                    succes(res);
+                }
+                else{
+                    let code = xhr.status;
+                    let msg = xhr.statusText || "Ocurrio un error";
+                    error({code, msg});
+                }
+            });
+            
+            //console.log(url,method,data);
+            //declaramos la peticion
+            xhr.open(method, url);
+            //definimos las cabeceras de la peticion
+            xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            //enviamos la peticion
+            xhr.send(JSON.stringify(data));
+        }
+
+       /*  xhrAjax({
+            url : "http://localhost:5000/usuarios",
+            method: "GET",
+            succes: (result)=>{
+                console.log(result);
+            },
+            error: (error)=> {
+                console.warn("Error al procesar la solicitud:",error.code, error.msg);
+            }
+        }); */
+
+        //poblar la tabla
+        document.addEventListener("DOMContentLoaded", e=>{
+            xhrAjax({
+                url : "http://localhost:5000/usuarios",
+                method: "GET",
+                succes: (result)=>{
+                    //console.log( result)
+                    //poblar la tabla
+                    result.forEach(usuario => {
+                        template.querySelector(".id").textContent = usuario.id;
+                        template.querySelector(".name").textContent = usuario.name;
+                        template.querySelector(".username").textContent = usuario.username;
+                        template.querySelector(".email").textContent = usuario.email;
+                        
+                        template.querySelector(".edit").dataset.id = usuario.id;
+                        template.querySelector(".edit").dataset.name = usuario.name;
+                        template.querySelector(".edit").dataset.username = usuario.username;
+                        template.querySelector(".edit").dataset.email = usuario.email;
+                        
+                        template.querySelector(".delete").dataset.id = usuario.id;
+                        
+                        let tableRow =  document.importNode(template, true);
+                        fragmento.appendChild(tableRow);
+                    });
+                    tabla.appendChild(fragmento);
+                    loader.classList.add("show");
+                    tabla.classList.remove("show");
+                },
+                error: (error)=> {
+                    console.warn("Error al procesar la solicitud:",error.code, error.msg);
+                },
+                data: null
+            });
+        })
+
+        //añadir un nuevo usuario
+        document.addEventListener("submit", e =>{
+            //verificamos el evento
+            let url;
+            let method;
+            if(e.target === formulario){
+                if(e.target.id.hasAttribute("value")){
+                    url = `http://localhost:5000/usuarios/${e.target.id.getAttribute("value")}`;
+                    method = "PUT";
+                }
+                else{
+                    url = "http://localhost:5000/usuarios";
+                    method = "POST";
+                }
+                console.log(url, method)
+
+                e.preventDefault();
+                console.log(e.target.nombre.value,e.target.usuario.value, e.target.correo.value);
+                xhrAjax({
+                    url,
+                    method,
+                    succes: (response)=>{
+                        console.log(response);
+                        location.reload();
+                    },
+                    error: (error) =>{
+                        console.warn(error.code, error.msg)
+                    } ,
+                    data: {
+                        name: e.target.nombre.value,
+                        username: e.target.usuario.value,
+                        email: e.target.correo.value
+                    }
+                });
+            }
+        });
+    
+        //actualizar y eliminar usuariio
+        document.addEventListener("click", e => {
+            //verificamos quie origina el evento
+            if(e.target.matches(".edit")){
+                //alert("Soy un edit")
+                console.log(e.target.dataset);
+                formulario.id.setAttribute("value",e.target.dataset.id);
+                formulario.nombre.value = e.target.dataset.name;
+                formulario.usuario.value = e.target.dataset.username;
+                formulario.correo.value = e.target.dataset.email;
+            }
+
+            if(e.target.matches(".delete")){
+                let res = confirm(`Deseas eliminar el registro: ${e.target.dataset.id}`);
+                if(res){
+                    xhrAjax({
+                        url : `http://localhost:5000/usuarios/${e.target.dataset.id }`,
+                        method: "DELETE",
+                        succes: (result)=>{
+                            console.log(result);
+                        },
+                        error: (error)=> {
+                            console.warn("Error al procesar la solicitud:",error.code, error.msg);
+                            // alert("Error al procesar la solicitud:",error.code, error.msg);
+                        }
+                    });
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

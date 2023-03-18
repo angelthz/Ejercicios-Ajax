@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+    <title>Checkout con Stripe</title>
+</head>
+<body>
+    <h1>Checkout con Stripe</h1>
+    <section class="tacos" id="tacos">
+        <template id="taco-template">
+            <figure class="taco">
+                <img>
+                <figcaption></figcaption>
+            </figure>
+        </template>
+    </section>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="js/stripe-checkout.js" type="module"></script>
+</body>
+</html>
