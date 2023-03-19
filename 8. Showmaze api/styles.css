@@ -1,0 +1,197 @@
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+html{
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+}
+
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
+}
+
+body{
+    margin: 0;
+    background: linear-gradient(0deg, #0f2027, #203a43, #2c5364); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #141e30, #243b55); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #232526, #414345); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #232526, #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #ec008c, #fc6767); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #ec008c, #fc6767); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #2b5876;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+
+}
+
+.header{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header>h1{
+    margin: 0;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.search-container{
+    width: 100%;
+    height: 90vh;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    transition: all .3s ease; 
+}
+
+.search-form{
+    width: 50%;
+    height: 10%;
+    padding: 2%;
+    border-radius: 1rem;
+    background-color: rgba(228, 231, 233, 0.4);
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 6px 7px 2px rgba(30, 30, 30, 0.5);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.search-form input{
+    display: block;
+    width: 90%;
+    height: 6vh;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.0);
+    color: whitesmoke;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+}
+
+.search-form input::placeholder{
+    color: whitesmoke;
+}
+
+.search-form span{
+    color: whitesmoke;
+    border-color: whitesmoke;
+}
+
+.loader{
+    display: block;
+    margin: 2rem auto;
+    width: 10vh;
+    height: auto;
+}
+
+.hide-loader{
+    display: none;
+}
+
+.shows-container{
+    /* width: 0;
+    height: 0; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+    transition: all .3s ease;
+}
+
+.error{
+    text-align: center;
+    font-size: 2rem;
+    color: whitesmoke;
+}
+
+.tvshows-active{
+    width: 100%;
+    min-height: 80vh;
+}
+
+.search-inactive{
+    height: 10vh;
+}
+
+
+.tvshow-card{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    color: #333;
+    max-width: 320px;
+    /* justify-content: spa;     */
+}
+
+.tvshow-card img{
+    border-radius: 1rem 1rem 0 0;
+}
+.content{
+    position: relative;
+    border-radius: 0 0 1rem 1rem;
+    /* background-color: whitesmoke; */
+    
+    padding: 1rem;
+    /* box-shadow: 0px 10px 30px 5px rgba(0, 0, 0, 0.693); */
+    background-color: rgba(228, 231, 233, 0.2);
+    backdrop-filter: blur(2px);
+    box-shadow: 0px 6px 7px 2px rgba(30, 30, 30, 0.5);
+    color: whitesmoke;
+}
+.content h2{
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.more-info{
+    position: absolute;
+    z-index: 1;
+    right: 2vh;
+    top: -3.5vh;
+    width: 7vh;
+    height: 7vh;
+    background-color: coral;
+    box-shadow: 0px 10px 30px 5px rgba(0,0,0,0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease;
+}
+
+.more-info a{
+    color: #333;
+    text-decoration: none;
+}
+
+.more-info:hover{
+    cursor: pointer;
+    background-color: rgb(216, 108, 69);
+}
