@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>API Wordpress</title>
+</head>
+<body>
+    <h1>Wordpress Rest API</h1>
+    <!-- Informacion del sitio Wordpress -->
+    <article id="site" class="site">
+        <!-- Carga de las publicaciones -->
+    </article>
+    <div class="loader hide">
+        <img class="load" src="assets/three-dots.svg" alt="load">
+    </div>
+    <section id="posts" class="posts">
+        <template id="post-template">
+            <article class="post">
+                <img class="post-image">
+                <aside>
+                    <h2 class="post-title"></h2>
+                    <figure class="post-autor">
+                        <img class="avatar">
+                        <figcaption class="author-name"></figcaption>
+                    </figure>
+                    <small class="post-date"></small>
+                    <a class="post-url" target="_blank">Ver publicacion original</a>
+                    <p class="post-excerpt"></p>
+                    <div class="post-categories"></div>
+                    <div class="post-tags"></div>
+                    <details class="post-content">
+                        <img class="load-post" src="assets/three-dots.svg" alt="load">
+                        <summary class="post-summary" data-postid>Ver contenido de la publicacion</summary>
+                        <article class="contenido"></article>
+                    </details>
+                </aside>
+            </article>
+            <hr>
+        </template>
+    </section>
+    <script src="script.js"></script> 
+</body>
+</html>
+
+
+
+
